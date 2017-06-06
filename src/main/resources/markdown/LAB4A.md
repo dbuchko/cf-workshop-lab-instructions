@@ -1,28 +1,72 @@
 #Pivotal CF Workshop - Lab Instructions
 
-##Java Module 4A 
+##Java Module 4A
 
 ###Goals
-* Deploy Sample Application
-* Access Environmental Variables Page
+* Create service
+* Bind service
+* Start application and use service
 
 ###Steps
-1. Rename the manifest file “manifest.yml” to “new-manifest.yml” (note in linux the move command “mv” is used to rename files)
- 
-2. Using the CLI push the built application again using the new manifest file created above.
+1. From the application running in your browser, click the `Attendees` link and add an attendee to your application.
+
+	<img src="img/app-add-attendee.png" width="700px"/>
+
+	Confirm that you see the new record added in your app.
+
+2. Restart your application.
 
 	```
-	> cf push --manifest new-manifest.yml
-	```
-	
-3. After application deploys and starts open a browser and navigate to the application.  The path to the application is supplied in a message similar to the following:
+cf restart <<app-name>>
+```
+
+	Verify the attendee you just added doesn't exist anymore by navigating to the `Attendees` link of the application.
+
+3. Let's add a database service to preserve the list of attendees when our app restarts.
+
+	Browse the list of services available in the Marketplace using the PWS Apps Manager.
+
+	<img src="img/pws-marketplace.png" width="700px"/>
+
+	Perform the same task from the CF CLI.  Try to see if you can find a MySQL service in the list.
 
 	```
-	Push successful! App 'ssmith-CFW' available at ssmith-CFW.cfapps.io
+cf marketplace
+```
+
+4. Use the CF CLI to create a new database service.
+
+	```
+	> cf create-service cleardb spark sql-svc
 	```
 
-	*Notice the details environment variables*
-	
-	<img src="img/J4A_1.png" width="500px"/> 
+5. Verify the service was created
+
+	```
+	> cf services
+	```
+
+	You should see the service you just created listed.  It should not be bound to any applications.
+
+6. Bind the service to your deployed application
+
+	```
+	> cf bind-service <<app_name>> sql-svc
+	```
 
 
+7. Verify the service has been bound to your application.
+
+	```
+	> cf services
+	```
+
+	You should now see the service created earlier listed in the `bound apps` column.
+
+8. Restart the application to utilize the service.
+
+	```
+	> cf restart <<app_name>>
+	```
+
+9. After the application restarts, repeat steps 2&3 to verify the attendees are retained even if the application is restarted.

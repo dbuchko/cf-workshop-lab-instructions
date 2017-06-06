@@ -3,29 +3,29 @@
 ##Module 1
 
 ###Goals
-* Log on to Pivotal CF account for first time
-* Setup organization
-* Lab VM Setup
+* Create a Pivotal CF account.
+* Install the CF CLI
+* Lab VM Setup (optional)
 
 ###Steps
-1. If you have not already done so open the email from Pivotal Web Services and click the verify you address link.
+1. Go to [Pivotal Web Services (PWS)](http://run.pivotal.io) and follow the instructions to sign up for a free account.
 
-  <img src="img/L1_1.png" width="600px"/> 
+	<img src="img/pws-home.png" width="700px"/>
 
-2. Set password and agree to Terms of Service and click "Sign Up Now"
+2. An organization is a logical grouping for your applications.  Since PWS is a publicly hosted version of PCF, you must pick an organization name that is unique across all accounts.  Your email address would be a good choice.
 
-  <img src="img/L1_2.png" width="500px"/> 
+3. Your Account should now be setup, be certain to log in.
 
-3. Create an organization name and click "Start Free Trial Now"
+4. Navigate to the `Tools` sub-menu on the left panel, and use the dropdown to select and download the CF CLI for your OS.
 
-  <img src="img/L1_3.png" width="500px"/> 
+	<img src="img/pws-tools.png" width="700px"/>
 
-4. Your Account should now be setup
+5. Install the CLI.
 
-  <img src="img/L1_4.png" width="750px"/> 
+6. Explore the CF CLI commands:
 
-5. Logon to either the Amazon AMI instance assigned to you, or the local Linux VM you have on your local machine.
-  
+	```
+cf help -a
+```
 
-
-
+7. OPTIONAL: If it is not possible to install the CF CLI locally, or you cannot access the Github repository, then logon to the Amazon AMI instance assigned to you.

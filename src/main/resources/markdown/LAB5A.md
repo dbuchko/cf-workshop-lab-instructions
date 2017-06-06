@@ -1,54 +1,17 @@
 #Pivotal CF Workshop - Lab Instructions
 
-##Java Module 5A 
+##Java Module 5A
 
 ###Goals
-* Scale deployed application to multiple instances
-* Verify application scaling occurred
+* Deploy using a manifest
 
 ###Steps
-1. Get information about deployed app using CLI command
+1. Let's demonstrate how we can use a manifest file for consistent application deployments.  First, using the `cf app <<app-name>>` command from CF CLI, or the PWS Apps Manager, confirm that your application has been allocated 768M of memory.
 
-	```
-	> cf apps
-	```
+	<img src="img/pws-app-memory.png" width="700px"/>
 
+2. In the project root directory, edit the `manifest.yml` file.
 
-	Note the deployed application URL (should be \<\<first_initial>>\<\<last_name>>-CFW.cfapps.io with your first inital and last name e.g “ssmith-CFW.cfapps.io”)
+3. Change the memory from `768M` to `1G`, and save the file.
 
-2. Get information about the instances
-
-	```
-	> cf instances <<app_name>>
-	``’ 
-
-	Where \<\<app_name>> is the sample app name (e.g. ssmith-CFW)
-
-	You should see only one instance.
-
-3. Scale the application to 3 instances
-
-	```
-	> cf scale <<app_name>>
-	```
-
-	When prompted indicate 3 instances
-	Select the default memory supplied (512M)
-
-4. Verify that there are now 3 instances
-
-	```
-	> cf instances <<app_name>>
-	```
-
-	(Some of the instances may be starting repeat checking instances until all start)
-
-5. Navigate to the app in the browser at http://\<\<first_initial>>\<\<last_name>>-CFW.cfapps.io and click the Kill button
-
-  	<img src="img/J5A_1.png" width="500px"/> 
-
-6. Reload the app Home Page http://\<\<first_initial>>\<\<last_name>>-CFW.cfapps.io
-
-  	<img src="img/J5A_2.png" width="500px"/> 
-	
-	You will notice the application port and index have changed from prior load.
+4. From the project root directory, push the application again, and use the Apps Manager or CF CLI to observe the updated memory allocated to the application.

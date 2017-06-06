@@ -5,4 +5,5 @@ applications:
   instances: 1
   host: cf-workshop-lab-instructions
   domain: cfapps.io
+  buildpack: java_buildpack
   path: target/cf-workshop-lab-instructions-0.1.war
